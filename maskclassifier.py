@@ -29,7 +29,7 @@ import board
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_rgb_display.st7789 as st7789
 
-print("mask classifier started")
+print("mask classifier started, press ESC to quit")
 
 
 # Configuration for CS and DC pins (these are FeatherWing defaults on M0/M4):
@@ -134,14 +134,10 @@ class VideoStream:
 # Define and parse input arguments
 parser = argparse.ArgumentParser()
 #parser.add_argument('--modeldir', help='Folder the .tflite file is located in',required=True)
-parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite',
-                    default='masktracker.tflite')
-parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt',
-                    default='labelmap.txt')
-parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects',
-                    default=0.5)
-parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.',
-                    default='1280x720')
+parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite', default='masktracker.tflite')
+parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt', default='labelmap.txt')
+parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects', default=0.5)
+parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.',default='1280x720')
 #parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection',action='store_true')
 
 args = parser.parse_args()
@@ -200,8 +196,7 @@ if labels[0] == '???':
 # Load the Tensorflow Lite model.
 # If using Edge TPU, use special load_delegate argument
 if use_TPU:
-    interpreter = Interpreter(model_path=PATH_TO_CKPT,
-                              experimental_delegates=[load_delegate('libedgetpu.so.1.0')])
+    interpreter = Interpreter(model_path=PATH_TO_CKPT, experimental_delegates=[load_delegate('libedgetpu.so.1.0')])
     print('USING TPU*******')
 else:
     interpreter = Interpreter(model_path=PATH_TO_CKPT)
@@ -284,7 +279,6 @@ while True:
             ymax = int(min(imH,(boxes[i][2] * imH)))
             xmax = int(min(imW,(boxes[i][3] * imW)))
             
-            
             if int(classes[i]) == 1:
                 cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (10, 255, 0), 3) #green
             elif int(classes[i]) == 0:
@@ -305,7 +299,6 @@ while True:
                 largestsize = currentsize
                 largestpercent = int(scores[i]*100)
 
-
     if largestsize == 0:
         object_name = ""
         screensizelabel = '' 
@@ -325,14 +318,9 @@ while True:
         accuracylabel = ''
         draw.rectangle(box, outline=(0,0,0), fill=(0,0,0)) 
         
-
     fpslabel = 'F: {0:.1f}'.format(frame_rate_calc)
     templabel = 'T: {0:.0f}F'.format(Temp)    
     #print("largest:", accuracylabel, screensizelabel)
-    
-
-    
-    
     
     y = top
     draw.text((x, y), accuracylabel, font=font, fill="#FFFFFF")
@@ -343,17 +331,14 @@ while True:
     y += 30
     draw.text((x, y), templabel, font=font, fill="#FF00FF")
 
-
-        
     # Display image.
     disp.image(image, rotation)
                 
-
     # Draw framerate in corner of frame
     cv2.putText(frame,fpslabel,(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
 
     # All the results have been drawn on the frame, so it's time to display it.
-    cv2.imshow('Object detector', frame)
+    cv2.imshow('Mask Detector', frame)
 
     # Calculate framerate
     t2 = cv2.getTickCount()
@@ -361,8 +346,7 @@ while True:
     frame_rate_calc= 1/time1
 
     # Press 'q' to quit
-    if cv2.waitKey(1) == ord('q'):
-        
+    if cv2.waitKey(5) == 27:
         break
 
 # Clean up
