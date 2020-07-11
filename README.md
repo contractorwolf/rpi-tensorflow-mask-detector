@@ -11,7 +11,7 @@ https://drive.google.com/drive/folders/1vmWE60hk2m1-LpgTiaFPef6ypZKsBlUi
 Original video with walkthrough of training on Windows 10:  
 https://www.youtube.com/watch?v=Rgpfk6eYxJA
 
-Github repo for Training
+Github repo for Training  
 https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10
 
 Image Labeling software  
