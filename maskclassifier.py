@@ -142,7 +142,7 @@ parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If t
 
 args = parser.parse_args()
 
-MODEL_NAME = 'tflite1/Sample_TFLite_model' #args.modeldir
+MODEL_NAME = 'tflite1/TFLiteModel' #args.modeldir
 GRAPH_NAME = args.graph
 LABELMAP_NAME = args.labels
 min_conf_threshold = float(args.threshold)
@@ -173,13 +173,13 @@ if use_TPU:
 CWD_PATH = os.getcwd()
 
 # Path to .tflite file, which contains the model that is used for object detection
-PATH_TO_CKPT = '/home/pi/tflite1/Sample_TFLite_model/mask_edgetpu.tflite'#os.path.join(CWD_PATH,MODEL_NAME,GRAPH_NAME)
+PATH_TO_CKPT = '/home/pi/tflite1/TFLiteModel/mask_edgetpu.tflite'#os.path.join(CWD_PATH,MODEL_NAME,GRAPH_NAME)
 
 #print(PATH_TO_CKPT)
 
 
 # Path to label map file
-PATH_TO_LABELS = '/home/pi/tflite1/Sample_TFLite_model/masklabelmap.txt'#os.path.join(CWD_PATH,MODEL_NAME,LABELMAP_NAME)
+PATH_TO_LABELS = '/home/pi/tflite1/TFLiteModel/masklabelmap.txt'#os.path.join(CWD_PATH,MODEL_NAME,LABELMAP_NAME)
 
 #print(PATH_TO_LABELS)
 
