@@ -1,7 +1,7 @@
 # RPi Covid-19 Mask Detector using Tensorflow v1.13 Object detection
 
 Full Google Colab for Training Model with Tensorflow v1.13 and convert to tflite and EdgeTPU
-https://colab.research.google.com/drive/1BcRaS2TGLJ6foKWULvvvjqdzsfaNqbyZ#scrollTo=Osocr5HIb0WB
+https://colab.research.google.com/drive/1uEkP5j7KM9eSkCUtUyauy7-Dyd5XAY6e?usp=sharing
 
 
 Google Drive with the Images folder and Config for the Google Colab  
